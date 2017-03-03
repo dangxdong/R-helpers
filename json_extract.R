@@ -3,8 +3,6 @@ options(encoding="UTF-8")
 
 # This function takes a vector of strings which are in json text format, and return a data frame based on a udf defined for a single json text element.
 
-
-
 # UDF1: a json extraction function, returns a named list from a single json text element.
 # just fill in this UDF1 function with your own code.
 
