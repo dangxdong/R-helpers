@@ -1,3 +1,3 @@
 # R-helpers
 
-Some helper functions for common use.
+Some helper functions for common general use.
