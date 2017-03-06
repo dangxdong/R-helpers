@@ -6,7 +6,10 @@ options(encoding="UTF-8")
 # UDF1: a json extraction function, returns a named list from a single json text element.
 # just fill in this UDF1 function with your own code.
 
-UDF1 = function(jsontxt) {   
+UDF1 = function(jsontxt) { 
+  
+  Encoding(jsontxt) = "UTF-8"   #  in case it's still not in UTF
+  
   if (jsonlite::validate(jsontxt)) {
     js1 = jsonlite::fromJSON(jsontxt)
     if(is.character(js1)){js1 = jsonlite::fromJSON(js1)}
