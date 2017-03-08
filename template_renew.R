@@ -1,4 +1,3 @@
-
 ### Some profesional software may export a template, 
 ##    which is not standard csv or json, but in some strangely formated plain text. 
 ##  We want to periodically export a new version of the template, and make our own customization,
