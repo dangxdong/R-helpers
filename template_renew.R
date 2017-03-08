@@ -32,8 +32,8 @@ filenames = rownames(file_details)[order(file_details$mtime, decreasing = T)]
 last_template = filenames[1]
 rm(file_details)
 rm(filenames)
-con <- file(last_template)
-filetext <- readLines(con)
+con = file(last_template)
+filetext = readLines(con)
 close(con)
 
 
