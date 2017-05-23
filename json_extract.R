@@ -15,8 +15,8 @@ UDF1 = function(jsontxt) {
     if(is.character(js1)){js1 = jsonlite::fromJSON(js1)}
    
     ## here add code to extract the fields of interest
-    name1 = something
-    name2 = someotherthing
+    name1 = if (is.null(js1$something)) NA else something
+    name2 = if (is.null(js1$somethingelse)) NA else somethingelse
     
   } else {
   
