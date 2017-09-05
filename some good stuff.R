@@ -2,7 +2,7 @@
 
 # Get the path containing this script
 args = commandArgs(trailingOnly = F)
-my_path_kafka_resubmit = normalizePath(dirname(sub("^--file=", "", args[grep("^--file=", args)])))
+my_path = normalizePath(dirname(sub("^--file=", "", args[grep("^--file=", args)])))
 
 
 # Get arguments from shell when run the Rscript from terminal.
