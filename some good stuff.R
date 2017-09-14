@@ -14,4 +14,4 @@ if (length(arguments) > 0) {
 }
 
 # To add libpath in case the Rscript is run by other users
-.libPaths('/home/myuser/R/x86_64-pc-linux-gnu-library/3.3')
+.libPaths(c('/home/myuser/R/x86_64-pc-linux-gnu-library/3.3', .libPaths()))
