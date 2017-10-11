@@ -14,6 +14,5 @@ if (length(arguments) > 0) {
 }
 
 # To add libpath in case the Rscript is run by other users
-
 Ruser_libpaths = list.dirs("/home/myuser/R/x86_64-pc-linux-gnu-library", recursive = F)
 .libPaths(c(Ruser_libpaths, .libPaths()))
