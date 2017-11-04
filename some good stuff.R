@@ -11,6 +11,7 @@ if (length(arguments) > 0) {
   my_argument1 = as.character(arguments[1])
 } else {
   my_argument1 = "default value"
+  remotechange = "remote"
 }
 
 # To add libpath in case the Rscript is run by other users
