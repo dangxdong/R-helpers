@@ -13,6 +13,7 @@ if (length(arguments) > 0) {
   my_argument1 = "default value"
 }
 
+localchange = "localchange"
 # To add libpath in case the Rscript is run by other users
 myHome = "/home/myuser"
 Ruser_libpaths = list.dirs(paste0(myHome, "/R/x86_64-pc-linux-gnu-library"), recursive = F)
