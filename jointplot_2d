@@ -7,11 +7,8 @@ jointplot_2d = function(x, y, xlabel="V1", ylabel="V2") {
   x = x[!isnaidx]
   y = y[!isnaidx]
   
-  rangex = max(x) - min(x)
-  rangey = max(y) - min(y)
-  
-  xlim1 = c(min(x)-0.01*rangex, max(x)+0.02*rangex)
-  ylim1 = c(min(y)-0.01*rangey, max(y)+0.02*rangey)
+  xlim1 = c(min(x), max(x))
+  ylim1 = c(min(y), max(y))
   
   bvn = data.frame(V1 = x, V2 = y)
   
@@ -19,7 +16,7 @@ jointplot_2d = function(x, y, xlabel="V1", ylabel="V2") {
     geom_histogram(aes(y=..density..), fill = "dodgerblue4", color = "white", alpha = 0.6, bins = 50) + 
     stat_density(colour = "dodgerblue4", geom="line", position="identity", show.legend=FALSE) +
     ylab("") +
-    scale_x_continuous(limits = xlim1) +
+    coord_cartesian(xlim = xlim1) +
     theme_bw() + theme(axis.title.x = element_blank(), 
                        panel.border = element_blank(),
                        axis.text.x=element_blank(),
@@ -49,8 +46,7 @@ jointplot_2d = function(x, y, xlabel="V1", ylabel="V2") {
     # geom_density_2d(color = "green", size=1) + 
     geom_point(size = 0.6, alpha = 0.1) +
     scale_fill_continuous(low = "white", high = "dodgerblue4") +
-    scale_x_continuous(xlabel, limits = xlim1) + 
-    scale_y_continuous(ylabel, limits = ylim1) + 
+    coord_cartesian(xlim = xlim1, ylim = ylim1) +
     theme_bw() +
     theme(panel.border = element_blank(),
     plot.margin=unit(c(0.2,0.2,0.2,0.2), "cm")) 
@@ -59,7 +55,8 @@ jointplot_2d = function(x, y, xlabel="V1", ylabel="V2") {
     geom_histogram(aes(y=..density..), fill = "dodgerblue4", color = "white", alpha = 0.6, bins = 50) + 
     stat_density(colour = "dodgerblue4", geom="line", position="identity", show.legend=FALSE) +
     ylab("") + 
-    scale_x_continuous(limits = ylim1) +
+    scale_x_continuous(limits = ylim1) +      # This line is still needed to align the grids
+    coord_cartesian(ylim = ylim1) +
     coord_flip() + theme_bw() + 
     theme(axis.title.y = element_blank(), 
           axis.text.y=element_blank(),
