@@ -2,12 +2,24 @@ library(ggplot2)
 library(gridExtra)
 
 jointplot_2d = function(x, y, xlabel="V1", ylabel="V2") {
+
+  isnaidx = (is.na(x)|is.na(y))
+  x = x[!isnaidx]
+  y = y[!isnaidx]
+  
+  rangex = max(x) - min(x)
+  rangey = max(y) - min(y)
+  
+  xlim1 = c(min(x)-0.01*rangex, max(x)+0.02*rangex)
+  ylim1 = c(min(y)-0.01*rangey, max(y)+0.02*rangey)
+  
   bvn = data.frame(V1 = x, V2 = y)
   
   htop = ggplot(data=bvn, aes(x=V1)) + 
     geom_histogram(aes(y=..density..), fill = "dodgerblue4", color = "white", alpha = 0.6, bins = 50) + 
     stat_density(colour = "dodgerblue4", geom="line", position="identity", show.legend=FALSE) +
     ylab("") +
+    scale_x_continuous(limits = xlim1) +
     theme_bw() + theme(axis.title.x = element_blank(), 
                        panel.border = element_blank(),
                        axis.text.x=element_blank(),
@@ -36,8 +48,8 @@ jointplot_2d = function(x, y, xlabel="V1", ylabel="V2") {
     # geom_density_2d(color = "green", size=1) + 
     geom_point(size = 0.6, alpha = 0.1) +
     scale_fill_continuous(low = "white", high = "dodgerblue4") +
-    xlab(xlabel) + 
-    ylab(ylabel) + 
+    scale_x_continuous(xlabel, limits = xlim1) + 
+    scale_y_continuous(ylabel, limits = ylim1) + 
     theme_bw() +
     theme(panel.border = element_blank()) 
   
@@ -45,11 +57,25 @@ jointplot_2d = function(x, y, xlabel="V1", ylabel="V2") {
     geom_histogram(aes(y=..density..), fill = "dodgerblue4", color = "white", alpha = 0.6, bins = 50) + 
     stat_density(colour = "dodgerblue4", geom="line", position="identity", show.legend=FALSE) +
     ylab("") + 
+    scale_x_continuous(limits = ylim1) +
     coord_flip() + theme_bw() + 
     theme(axis.title.y = element_blank(), 
           axis.text.y=element_blank(),
           axis.ticks.y=element_blank(), 
           panel.border = element_blank())
+          
+  gA=ggplot_gtable(ggplot_build(htop))
+  gB=ggplot_gtable(ggplot_build(blank))
+  gC=ggplot_gtable(ggplot_build(densitycontour))
+  gD=ggplot_gtable(ggplot_build(hright))
   
-  grid.arrange(htop, blank, densitycontour, hright, ncol=2, nrow=2, widths=c(4, 1), heights=c(1, 4))
+  maxWidth1 = unit.pmax(gA$widths, gC$widths)
+  gA$widths = as.list(maxWidth1)
+  gC$widths = as.list(maxWidth1)
+  
+  maxheight1 = unit.pmax(gC$heights, gD$heights)
+  gC$heights = as.list(maxheight1)
+  gD$heights = as.list(maxheight1)
+  
+  grid.arrange(gA, gB, gC, gD, ncol=2, nrow=2, widths=c(4, 1), heights=c(1, 4))
 }
