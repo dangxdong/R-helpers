@@ -46,6 +46,7 @@ jointplot_2d = function(x, y, xlabel="V1", ylabel="V2") {
     # geom_density_2d(color = "green", size=1) + 
     geom_point(size = 0.6, alpha = 0.1) +
     scale_fill_continuous(low = "white", high = "dodgerblue4") +
+    xlab(xlabel) + ylab(ylabel) +
     coord_cartesian(xlim = xlim1, ylim = ylim1) +
     theme_bw() +
     theme(panel.border = element_blank(),
