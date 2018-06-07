@@ -1,8 +1,6 @@
 library(ggplot2)
 library(gridExtra)
 
-
-
 jointplot_2d = function(x, y, xlabel="V1", ylabel="V2") {
   bvn = data.frame(V1 = x, V2 = y)
   
@@ -32,9 +30,8 @@ jointplot_2d = function(x, y, xlabel="V1", ylabel="V2") {
   #   scale_y_continuous("label V2", limits = c(0,101)) + 
   #   theme_bw()
   
-  
+ 
   densitycontour = ggplot(data=bvn, aes(x=V1, y=V2)) + 
-    
     stat_density_2d(aes(fill = ..level..), alpha=0.8, geom = "polygon", colour="white", show.legend=FALSE) +
     # geom_density_2d(color = "green", size=1) + 
     geom_point(size = 0.6, alpha = 0.1) +
@@ -44,7 +41,6 @@ jointplot_2d = function(x, y, xlabel="V1", ylabel="V2") {
     theme_bw() +
     theme(panel.border = element_blank()) 
   
-  
   hright = ggplot(data=bvn, aes(x=V2)) + 
     geom_histogram(aes(y=..density..), fill = "dodgerblue4", color = "white", alpha = 0.6, bins = 50) + 
     stat_density(colour = "dodgerblue4", geom="line", position="identity", show.legend=FALSE) +
@@ -53,6 +49,7 @@ jointplot_2d = function(x, y, xlabel="V1", ylabel="V2") {
     theme(axis.title.y = element_blank(), 
           axis.text.y=element_blank(),
           axis.ticks.y=element_blank(), 
-          panel.border = element_blank()) 
+          panel.border = element_blank())
+  
   grid.arrange(htop, blank, densitycontour, hright, ncol=2, nrow=2, widths=c(4, 1), heights=c(1, 4))
 }
