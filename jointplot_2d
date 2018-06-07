@@ -1,4 +1,5 @@
 library(ggplot2)
+library(grid)
 library(gridExtra)
 
 jointplot_2d = function(x, y, xlabel="V1", ylabel="V2") {
